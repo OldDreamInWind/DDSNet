@@ -38,6 +38,11 @@ class DenseBlock(nn.Module):
             X = torch.cat((X, Y), dim=1)
         return X
 
+def transition_block(input_channels, num_channels):
+        return nn.Sequential(
+            nn.BatchNorm2d(input_channels), nn.ReLU(),
+            nn.Conv2d(input_channels, num_channels, kernel_size=1),
+            nn.AvgPool2d(kernel_size=2, stride=2))
 class DDSNet(nn.Module):
     def __init__(self, input_channels, output_channels):
         super().__init__()
@@ -62,12 +67,6 @@ class DDSNet(nn.Module):
                                 nn.AdaptiveAvgPool2d((1, 1)),
                                 nn.Flatten(),
                                 nn.Linear(num_channels, output_channels))
-        
-    def transition_block(self, input_channels, num_channels):
-        return nn.Sequential(
-            nn.BatchNorm2d(input_channels), nn.ReLU(),
-            nn.Conv2d(input_channels, num_channels, kernel_size=1),
-            nn.AvgPool2d(kernel_size=2, stride=2))
 
     def forward(self, x):
         x = self.net(x)
