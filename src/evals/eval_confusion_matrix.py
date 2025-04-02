@@ -31,6 +31,6 @@ def eval_confusion_matrix(args, test_loader, labels, device, model):
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
     disp.plot()
     plt.title("Confusion_Matrix_"+args.dataset)
-    fig_path = os.join(args.result_path, "Confusion_Matrix_"+args.dataset+".png")
+    fig_path = os.path.join(args.result_path, "Confusion_Matrix_"+args.dataset+".png")
     plt.savefig(fig_path)
     return cm

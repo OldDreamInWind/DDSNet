@@ -89,34 +89,34 @@ def prepare(args):
 
     device=args.device
     if args.dataset=='GC':
-        train_dataset = datasets.ImageFolder(root=os.join(args.dataset_path, "custom_dataset/train"), 
+        train_dataset = datasets.ImageFolder(root=os.path.join(args.dataset_path, "custom_dataset/train"), 
                                              transform=image_transforms_RS)
-        val_dataset = datasets.ImageFolder(root=os.join(args.dataset_path, "custom_dataset/val"), 
+        val_dataset = datasets.ImageFolder(root=os.path.join(args.dataset_path, "custom_dataset/val"), 
                                            transform=image_transforms_RS)
         labels = val_dataset.classes
         
     if args.dataset=='PCam':
-        train_dataset = PCamDataset(os.join(args.dataset_path, "pcam/training_split.h5"), 
-                                    os.join(args.dataset_path, "Labels/Labels/camelyonpatch_level_2_split_train_y.h5"), 
+        train_dataset = PCamDataset(os.path.join(args.dataset_path, "pcam/training_split.h5"), 
+                                    os.path.join(args.dataset_path, "Labels/Labels/camelyonpatch_level_2_split_train_y.h5"), 
                                     transform=image_transforms_H5)
-        val_dataset = PCamDataset(os.join(args.dataset_path, "pcam/validation_split.h5"), 
-                                    os.join(args.dataset_path, "Labels/Labels/camelyonpatch_level_2_split_valid_y.h5"), 
+        val_dataset = PCamDataset(os.path.join(args.dataset_path, "pcam/validation_split.h5"), 
+                                    os.path.join(args.dataset_path, "Labels/Labels/camelyonpatch_level_2_split_valid_y.h5"), 
                                     transform=image_transforms_H5)
         labels = ['normal', 'tumor']
         
     if args.dataset=='Skin':
-        train_dataset = SkinDataset(csv_file=os.join(args.dataset_path, "HAM10000_metadata.csv"), 
-                                    img_dir=os.join(args.dataset_path, "Skin_Cancer"),
+        train_dataset = SkinDataset(csv_file=os.path.join(args.dataset_path, "HAM10000_metadata.csv"), 
+                                    img_dir=os.path.join(args.dataset_path, "Skin_Cancer"),
                                     split='train',
                                     transform=image_transforms_CC)
-        val_dataset = SkinDataset(csv_file=os.join(args.dataset_path, "HAM10000_metadata.csv"), 
-                                  img_dir=os.join(args.dataset_path, "Skin_Cancer"), 
+        val_dataset = SkinDataset(csv_file=os.path.join(args.dataset_path, "HAM10000_metadata.csv"), 
+                                  img_dir=os.path.join(args.dataset_path, "Skin_Cancer"), 
                                   split='val',
                                   transform=image_transforms_CC)
         labels = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
 
     if args.dataset=='Sipak':
-        dataset = datasets.ImageFolder(root=os.join(args.dataset_path, "SipakMed"), transform=image_transforms_RS)
+        dataset = datasets.ImageFolder(root=os.path.join(args.dataset_path, "SipakMed"), transform=image_transforms_RS)
         targets = np.array(dataset.targets)
         train_idx, val_idx = train_test_split(np.arange(len(targets)), test_size=0.2, stratify=targets, random_state=42)
         train_dataset = Subset(dataset, train_idx)
@@ -157,7 +157,7 @@ def train(args):
         if(accuracy_temp > accuracy):
             accuracy = accuracy_temp
             ckpt = args.model + "_" + args.dataset + "_" + str(args.learning_rate)+".pth"
-            torch.save(model.state_dict(), os.join(args.result_path, ckpt))
+            torch.save(model.state_dict(), os.path.join(args.result_path, ckpt))
             print("the best acc of myNet is at epoch " + str(t+1) + " now.")
 
 

@@ -89,15 +89,15 @@ def eval_gcam(args, model):
     
     image = cv2.imread(args.test_image)
     image = cv2.resize(image, (224, 224))
-    output_path = os.join(args.result_path, args.dataset+"_resize.png")
+    output_path = os.path.join(args.result_path, args.dataset+"_resize.png")
     cv2.imwrite(output_path, image)
     
     image = np.float32(image) / 255
     heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET)
-    output_path = os.join(args.result_path, args.dataset+"_heat.png")
+    output_path = os.path.join(args.result_path, args.dataset+"_heat.png")
     cv2.imwrite(output_path, heatmap)
     
     # Overlap gcam on image
     result = show_cam_on_image(image, cam)
-    output_path = os.join(args.result_path, args.dataset+"_gcam.png")
+    output_path = os.path.join(args.result_path, args.dataset+"_gcam.png")
     cv2.imwrite(output_path, result)
