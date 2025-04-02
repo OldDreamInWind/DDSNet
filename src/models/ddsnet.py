@@ -59,7 +59,7 @@ class DDSNet(nn.Module):
             num_channels += num_convs * growth_rate
             # Add transition block between dense blocks, half the channels
             if i != len(num_convs_in_dense_blocks) - 1:
-                blks.append(self.transition_block(num_channels, num_channels // 2))
+                blks.append(transition_block(num_channels, num_channels // 2))
                 num_channels = num_channels // 2
 
         self.net = nn.Sequential(self.b1, *blks,
