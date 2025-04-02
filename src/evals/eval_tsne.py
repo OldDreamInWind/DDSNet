@@ -14,7 +14,7 @@ from torchvision import datasets, transforms
 from torchvision.models import vgg11, resnet18, densenet121, squeezenet1_0, inception_v3
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
-from one_epoch_eval import one_epoch_eval
+from evals.one_epoch_eval import one_epoch_eval
 
 
 def eval_tsne(args, test_loader, labels, device, model):

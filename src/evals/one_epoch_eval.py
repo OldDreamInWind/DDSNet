@@ -1,10 +1,5 @@
 import torch
 import numpy as np
-from train import prepare
-from evals.eval_tsne import eval_tsne
-from evals.eval_confusion_matrix import eval_confusion_matrix
-from evals.eval_gcam import eval_gcam
-from evals.eval_time import eval_time
 
 def one_epoch_eval(dataloader, model, device):
     model.eval()
