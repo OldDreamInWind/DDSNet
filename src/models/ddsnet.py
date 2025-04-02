@@ -63,7 +63,7 @@ class DDSNet(nn.Module):
                                 nn.Flatten(),
                                 nn.Linear(num_channels, output_channels))
         
-    def transition_block(input_channels, num_channels):
+    def transition_block(self, input_channels, num_channels):
         return nn.Sequential(
             nn.BatchNorm2d(input_channels), nn.ReLU(),
             nn.Conv2d(input_channels, num_channels, kernel_size=1),
